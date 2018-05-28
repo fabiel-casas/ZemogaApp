@@ -1,4 +1,4 @@
-package com.casas.fabiel.data.entities
+package com.casas.fabiel.data.repository.entities
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

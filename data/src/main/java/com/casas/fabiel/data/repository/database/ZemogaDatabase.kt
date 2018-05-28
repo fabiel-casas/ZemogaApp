@@ -1,10 +1,11 @@
-package com.casas.fabiel.data.database
+package com.casas.fabiel.data.repository.database
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.casas.fabiel.data.entities.Posts
+import com.casas.fabiel.data.repository.dao.PostsDao
+import com.casas.fabiel.data.repository.entities.Posts
 
 @Database(entities = arrayOf(Posts::class), version = 1)
 abstract class ZemogaDatabase : RoomDatabase() {
@@ -23,4 +24,6 @@ abstract class ZemogaDatabase : RoomDatabase() {
             INSTANCE = null
         }
     }
+
+    abstract fun postsDao(): PostsDao
 }
