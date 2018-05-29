@@ -5,12 +5,16 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.casas.fabiel.data.repository.entities.Posts
 import com.casas.fabiel.zemogaapp.R
+import com.casas.fabiel.zemogaapp.ui.adapters.PostAdapter
+import com.casas.fabiel.zemogaapp.ui.view.SimpleDividerItemDecoration
 import com.casas.fabiel.zemogaapp.viewmodel.PostsListViewModel
+import kotlinx.android.synthetic.main.fragment_posts_list.*
 
 class PostsListFragment : Fragment() {
 
@@ -26,13 +30,21 @@ class PostsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this)
                 .get(PostsListViewModel::class.java)
-        viewModel.getPostList(context!!).observe(this, updateAdapterView())
+        viewModel.getPostList(context!!).observe(this, getPostsObserver())
     }
 
-    fun updateAdapterView() : Observer<List<Posts>> {
+    fun getPostsObserver() : Observer<List<Posts>> {
         return Observer {
-
+            updateAdapterView(it)
         }
+    }
+
+    private fun updateAdapterView(posts: List<Posts>?) {
+        recyclerViewPostList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerViewPostList.addItemDecoration(SimpleDividerItemDecoration(context!!))
+        val adapter = PostAdapter()
+        adapter.postsLists = posts!!
+        recyclerViewPostList.adapter = adapter
     }
 
 }

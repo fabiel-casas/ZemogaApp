@@ -8,12 +8,12 @@ import com.casas.fabiel.zemogaapp.livedata.PostsListener
 
 class PostsListViewModel : ViewModel() {
 
-    private lateinit var postListener: PostsListener
+    private var postListener: PostsListener? = null
 
     fun getPostList(context: Context): LiveData<List<Posts>> {
         if (postListener == null) {
             postListener = PostsListener(context)
         }
-        return postListener
+        return postListener!!
     }
 }

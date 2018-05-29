@@ -3,7 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.2.41'
     ext.kotlin_version = '1.2.30'
-    ext.room_version = "1.1.0" // or, for latest rc, use "1.1.1-rc1"
+    ext.room_version = "1.1.1-rc1" // or, for latest rc, use "1.1.1-rc1"
     ext.lifecycle_version = "1.1.1"
     repositories {
         google()
