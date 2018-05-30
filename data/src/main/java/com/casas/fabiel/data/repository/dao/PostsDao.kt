@@ -1,9 +1,6 @@
 package com.casas.fabiel.data.repository.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.casas.fabiel.data.repository.entities.Posts
 
 
@@ -15,10 +12,14 @@ interface PostsDao {
     @Query("SELECT * FROM Posts WHERE userId IN (:userIds)")
     fun loadAllByIds(userIds: IntArray): List<Posts>
 
-    @Insert
-    fun insert(posts: Posts)
+    @Query("SELECT * FROM Posts WHERE isFavorite = 1")
+    fun loadAllFavorites(): List<Posts>
 
-    @Insert
+    @Query("UPDATE Posts SET isFavorite = (:selected) WHERE id = (:postId)")
+    fun updatePost(selected: Int, postId:Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @JvmSuppressWildcards
     fun insertAll(posts: List<Posts>)
 
     @Query("DELETE from Posts")

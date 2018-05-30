@@ -5,7 +5,7 @@ import android.content.Context
 import com.casas.fabiel.data.repository.entities.Posts
 import com.casas.fabiel.data.services.PostsListsService
 
-class PostsListener(var context: Context) : LiveData<List<Posts>>() {
+class PostsFavoritesListener(var context: Context) : LiveData<List<Posts>>() {
 
     private lateinit var postsService: PostsListsService
     private val listener: (List<Posts>) -> Unit = {
@@ -18,7 +18,7 @@ class PostsListener(var context: Context) : LiveData<List<Posts>>() {
 
     override fun onActive() {
         super.onActive()
-        postsService.getAllPost(listener)
+        postsService.getAllPostFavorite(listener)
     }
 
     override fun onInactive() {

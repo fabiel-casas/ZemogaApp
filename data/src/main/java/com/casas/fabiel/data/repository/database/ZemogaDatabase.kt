@@ -7,7 +7,7 @@ import android.content.Context
 import com.casas.fabiel.data.repository.dao.PostsDao
 import com.casas.fabiel.data.repository.entities.Posts
 
-@Database(entities = arrayOf(Posts::class), version = 1)
+@Database(entities = arrayOf(Posts::class), version = 1, exportSchema = false)
 abstract class ZemogaDatabase : RoomDatabase() {
     companion object {
         var INSTANCE: ZemogaDatabase? = null
