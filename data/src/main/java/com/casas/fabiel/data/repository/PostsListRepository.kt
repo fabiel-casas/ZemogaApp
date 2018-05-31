@@ -36,6 +36,14 @@ class PostsListRepository {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun increasePostViews(postId: Int): Observable<Int> {
+        return Observable.create<Int> {
+            database.postsDao().updatePost(postId)
+            it.onNext(postId)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun getAllPost(listener: (List<Posts>) -> Unit) {
         Observable.create<List<Posts>> {
             it.onNext(database.postsDao().getAll())

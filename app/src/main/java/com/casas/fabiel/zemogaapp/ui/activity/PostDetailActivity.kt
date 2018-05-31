@@ -1,13 +1,18 @@
 package com.casas.fabiel.zemogaapp.ui.activity
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.casas.fabiel.data.repository.entities.Comments
 import com.casas.fabiel.data.repository.entities.Posts
 import com.casas.fabiel.data.repository.entities.User
 import com.casas.fabiel.zemogaapp.R
+import com.casas.fabiel.zemogaapp.ui.adapters.CommentsAdapter
+import com.casas.fabiel.zemogaapp.ui.view.SimpleDividerItemDecoration
 import com.casas.fabiel.zemogaapp.utils.StringsUtils
 import com.casas.fabiel.zemogaapp.viewmodel.PostDetailViewModel
 import kotlinx.android.synthetic.main.activity_post_detail.*
@@ -31,8 +36,19 @@ class PostDetailActivity : AppCompatActivity() {
         postData = intent.extras.getSerializable(KEY_POST) as Posts
         user = User.getDefaultUser()
         viewModel = ViewModelProviders.of(this).get(PostDetailViewModel::class.java)
-        viewModel.intRepository(this)
+        viewModel.intRepository(this, postData)
+        viewModel.getComments(this, postData).observe(this, Observer{
+            updateComments(it)
+        })
         populateData()
+    }
+
+    private fun updateComments(comments: List<Comments>?) {
+        recyclerViewComments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        var adapter = CommentsAdapter()
+        adapter.commentsList = comments!!
+        recyclerViewComments.addItemDecoration(SimpleDividerItemDecoration(this))
+        recyclerViewComments.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

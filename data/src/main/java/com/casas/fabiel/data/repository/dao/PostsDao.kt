@@ -18,6 +18,9 @@ interface PostsDao {
     @Query("UPDATE Posts SET isFavorite = (:selected) WHERE id = (:postId)")
     fun updatePost(selected: Int, postId:Int)
 
+    @Query("UPDATE Posts SET viewCount = viewCount + 1 WHERE id = (:postId)")
+    fun updatePost(postId:Int)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     @JvmSuppressWildcards
     fun insertAll(posts: List<Posts>)

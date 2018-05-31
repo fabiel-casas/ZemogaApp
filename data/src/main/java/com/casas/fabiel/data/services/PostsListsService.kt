@@ -2,6 +2,7 @@ package com.casas.fabiel.data.services
 
 import android.content.Context
 import com.casas.fabiel.data.repository.PostsListRepository
+import com.casas.fabiel.data.repository.entities.Comments
 import com.casas.fabiel.data.repository.entities.Posts
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,6 +43,17 @@ class PostsListsService(val context: Context) {
 
     fun getAllPostFavorite(listener: (List<Posts>) -> Unit) {
         postsRepository.getAllFavoritePost(listener)
+    }
+
+    fun getCommentsInAPost(postId: String, listener: (List<Comments>) -> Unit) {
+        postsRequest.getAllCommentsInAPosts(postId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    listener(it)
+                }, {
+                    listener(arrayListOf())
+                })
     }
 
 }
