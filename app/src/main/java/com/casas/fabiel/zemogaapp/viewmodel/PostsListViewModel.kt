@@ -16,4 +16,8 @@ class PostsListViewModel : ViewModel() {
         }
         return postListener!!
     }
+
+    fun deleteAllPost() {
+        postListener!!.deleteAllPost()
+    }
 }

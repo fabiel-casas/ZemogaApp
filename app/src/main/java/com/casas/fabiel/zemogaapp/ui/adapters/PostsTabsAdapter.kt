@@ -7,10 +7,11 @@ import com.casas.fabiel.zemogaapp.ui.fragment.FavoritePostsFragment
 import com.casas.fabiel.zemogaapp.ui.fragment.PostsListFragment
 
 class PostsTabsAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+    var postListFragment = PostsListFragment()
 
     override fun getItem(position: Int): Fragment {
         return if(position == 0) {
-            PostsListFragment()
+            postListFragment
         } else {
             FavoritePostsFragment()
         }
@@ -26,6 +27,10 @@ class PostsTabsAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         } else {
             "FAVORITES"
         }
+    }
+
+    fun deleteAllPost() {
+        postListFragment.deleteAllPost()
     }
 
 }

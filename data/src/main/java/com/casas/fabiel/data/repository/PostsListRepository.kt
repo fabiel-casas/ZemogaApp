@@ -60,6 +60,11 @@ class PostsListRepository {
         return database.postsDao().getAll()
     }
 
+    fun deleteAllPost(listener: (List<Posts>) -> Unit) {
+        database.postsDao().deleteAll()
+        listener(arrayListOf())
+    }
+
     fun getAllFavoritePost(listener: (List<Posts>) -> Unit) {
         Observable.create<List<Posts>> {
             it.onNext(database.postsDao().loadAllFavorites())

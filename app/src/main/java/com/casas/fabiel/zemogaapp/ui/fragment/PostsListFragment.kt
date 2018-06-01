@@ -54,4 +54,8 @@ class PostsListFragment : Fragment() {
         startActivity(intent)
     }
 
+    fun deleteAllPost() {
+        viewModel.deleteAllPost()
+    }
+
 }

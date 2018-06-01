@@ -41,6 +41,20 @@ class PostsListsService(val context: Context) {
                 })
     }
 
+    fun deleteAllPost(listener: (List<Posts>) -> Unit) {
+        Observable.create<List<Posts>> {
+            postsRepository.deleteAllPost(listener)
+            it.onNext(arrayListOf())
+        }.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    postsRepository.savePosts(it)!!.subscribe()
+                    listener(it)
+                }, {
+                    postsRepository.getAllPost(listener)
+                })
+    }
+
     fun getAllPostFavorite(listener: (List<Posts>) -> Unit) {
         postsRepository.getAllFavoritePost(listener)
     }

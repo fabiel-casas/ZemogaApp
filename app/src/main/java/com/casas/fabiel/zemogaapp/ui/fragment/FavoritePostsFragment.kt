@@ -36,6 +36,10 @@ class FavoritePostsFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this)
                 .get(PostsFavoritesViewModel::class.java)
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getPostFavoriteList(context!!).observe(this, Observer {
             updateAdapter(it)
         })

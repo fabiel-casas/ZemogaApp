@@ -25,8 +25,8 @@ class PostsListener(var context: Context) : LiveData<List<Posts>>() {
         super.onInactive()
     }
 
-    private fun connect() {
-
+    fun deleteAllPost() {
+        postsService.deleteAllPost(listener)
     }
 
 }

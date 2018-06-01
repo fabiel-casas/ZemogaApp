@@ -13,4 +13,7 @@
     <string name="post_detail_user_website">Website: %1$s</string>
     <string name="post_detail_comments">COMMENTS</string>
     <string name="detail_menu_favorite">Favorite</string>
+    <string name="list_menu_refresh">Refresh</string>
+    <string name="menu_delete_all">Delete All</string>
+    <string name="menu_delete_cancel">Cancel</string>
 </resources>

@@ -17,4 +17,16 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
+    <style name="TagStyle">
+        <item name="android:background">@drawable/fab_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TagButtonGreen">
+        <item name="fab_size">mini</item>
+        <item name="fab_colorNormal">@color/colorPrimary</item>
+        <item name="fab_colorPressed">@color/colorPrimaryDark</item>
+        <item name="fab_colorRipple">@color/colorAccent</item>
+    </style>
+
 </resources>
